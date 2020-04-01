@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+    
 
     <title>GIF Collector</title>
 
 </head>
 <body>
     <div class="row" id="keywords">
-        <button class="btn btn-primary">Cats</button>
+        <button class="btn btn-primary" data-animal="cat">Cats</button>
+        <button class="btn btn-primary" data-animal="fish">Fish</button>
+        <button class="btn btn-primary" data-animal="bird">Birds</button>
     </div>
     <form class="form-inline">
         <input class="form-control" type="text" placeholder="Type an animal">
@@ -23,5 +22,32 @@
     <div class="row" id="display">
 
     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+var animals = ["cats", "fish", "birds"];
+
+$("button").on("click", function() {
+    var animal = $(this).data("animal");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&limit=5";
+    
+    $("#display").empty();
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(response => {
+        var results = response.data;
+        for (var i = 0; i < results.length; i++) {
+            var animalDiv = $("<div>");
+            var pRating = $("<p>").text(results[i].rating);
+            var animalGIF = $("<img>").attr("src", results[i].images.original.url);
+            animalDiv.append(animalGIF, pRating);
+            $("#display").append(animalDiv);
+        }
+    });
+});
+</script>
 </body>
 </html>
