@@ -31,8 +31,7 @@ var userCommand;
 
 $(document).on("click", ".animalButton", function() {
     var animal = $(this).data("animal");
-    console.log(this);
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&limit=5";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&limit=10";
     
     $("#display").empty();
 
@@ -44,7 +43,8 @@ $(document).on("click", ".animalButton", function() {
         for (var i = 0; i < results.length; i++) {
             var animalDiv = $("<div>");
             var pRating = $("<p>").text("Rated: " + results[i].rating.toUpperCase());
-            var animalGIF = $("<img>").attr("src", results[i].images.original.url);
+            var animalGIF = $("<img>").attr({src: results[i].images.fixed_width_still.url, "data-still": results[i].images.fixed_width_still.url, "data-animate": results[i].images.fixed_width.url});
+            animalGIF.attr({class: "gif", "data-state": "still"});
             animalDiv.append(animalGIF, pRating);
             $("#display").append(animalDiv);
         }
@@ -56,6 +56,21 @@ $("#search").on("click", function(event) {
     userCommand = $("#userInput").val();
     var newButton = $(`<button class='btn btn-primary animalButton' style='text-transform: capitalize;' data-animal=${userCommand}>`).html(userCommand);
     $("#keywords").append(newButton);
+});
+
+$(document).on("click", ".gif", function() {
+    var state = $(this).data("state");
+    console.log(state);
+    if (state === "still") {
+        var animated = $(this).data("animate");
+        $(this).attr("src", animated);
+        $(this).data("state", "animated");
+    }
+    if (state === "animated") {
+        var stilled = $(this).data("still");
+        $(this).attr("src", stilled);
+        $(this).data("state", "still");
+    }
 });
    
 </script>
