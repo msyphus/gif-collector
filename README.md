@@ -2,7 +2,7 @@
 
 # Demo
 
-This app can be accessed [here] (https://msyphus.github.io/gif-collector/)
+This app can be accessed [here.](https://msyphus.github.io/gif-collector/)
 
 # General
 
