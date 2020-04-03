@@ -31,7 +31,7 @@ var userCommand;
 $(document).on("click", ".animalButton", function() {
     var animal = $(this).data("animal");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&rating=pg&limit=10";
-    console.log(queryURL);
+
     $("#display").empty();
 
     $.ajax({
@@ -59,7 +59,6 @@ $("#srch").on("click", function(event) {
 
 $(document).on("click", ".gif", function() {
     var state = $(this).data("state");
-    console.log(state);
     if (state === "still") {
         var animated = $(this).data("animate");
         $(this).attr("src", animated);
