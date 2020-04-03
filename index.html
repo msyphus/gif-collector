@@ -16,8 +16,8 @@
         <button class="btn btn-primary mr-1 animalButton" data-animal="bird">Birds</button>
     </div>
     <form class="form-inline my-3 mx-3">
-        <input id="userInput" class="form-control" type="text" placeholder="Type an animal">
-        <button id="search" class="btn btn-primary" type="submit">Search</button>
+        <input id="usrInput" class="form-control" type="text" placeholder="Type an animal">
+        <button id="srch" class="btn btn-primary" type="submit">Search</button>
     </form>
     <div class="row mx-3" id="display">
 
@@ -50,9 +50,9 @@ $(document).on("click", ".animalButton", function() {
     });
 });
 
-$("#search").on("click", function(event) {
+$("#srch").on("click", function(event) {
     event.preventDefault();    
-    userCommand = $("#userInput").val();
+    userCommand = $("#usrInput").val();
     var newButton = $(`<button class='btn btn-primary mr-1 animalButton' style='text-transform: capitalize;' data-animal=${userCommand}>`).html(userCommand);
     $("#keywords").append(newButton);
 });
