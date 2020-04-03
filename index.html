@@ -30,7 +30,7 @@ var userCommand;
 
 $(document).on("click", ".animalButton", function() {
     var animal = $(this).data("animal");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&?rating=g,pg&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=G9eOse8L8DDWW2F60ZVQK0VRHLQ8fREb&rating=pg&limit=10";
     console.log(queryURL);
     $("#display").empty();
 
